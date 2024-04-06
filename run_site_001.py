@@ -14,8 +14,8 @@ from fastapi.responses import FileResponse
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import time
-from data.data_ml import data_set
-from data.data_gpt import texts
+from data_ml import data_set
+from data_gpt import texts
 import g4f
 
 import requests
@@ -88,8 +88,8 @@ def read_json(file_path):
         return None
 
 # Считываем базу данных
-data_ml = read_json("data\data_ml.json")
-data_gpt = read_json("data\data_gpt.json")
+data_ml = read_json("data_ml.json")
+data_gpt = read_json("data_gpt.json")
 
 
 async def process_chunk(voice, text_chunk, output_file):
@@ -323,7 +323,7 @@ async def get_answer(request: Request, question: str = Form(...)):
     chat_history = chat_history_by_user.get(user_id, [])
     
     async with httpx.AsyncClient() as client:
-        response = await client.get("http://comtehbot:8000/get_response", params={"question": question}, timeout=20)
+        response = await client.get("http://127.0.0.1:8000/get_response", params={"question": question}, timeout=20)
 
         # Проверяем успешность запроса
         if response.status_code == 200:
