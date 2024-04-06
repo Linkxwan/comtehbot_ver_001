@@ -19,7 +19,15 @@
             </div>
             <div class="user-info">
                 <div class="user-name font-semibold">Ассистент комтехно</div>
-                <div class="message-content">Здраствуйте! Чем я могу помочь вам сегодня?</div>
+                <div>
+                    <p>Привет! Я - бот Комтехно. Я создан для помощи вам в получении информации о нашем колледже и процессе обучения. Хотя моя база данных с ответами еще не полностью заполнена, я постоянно обновляюсь и улучшаюсь.</p>
+                    <p>Вот что я могу делать на данный момент:</p>
+                    <ul>
+                        <li>Отвечать на вопросы о нашем колледже.</li>
+                        <li>Предоставлять информацию о процессе поступления и обучения.</li>
+                    </ul>
+                    <p>Если у вас есть конкретные вопросы или запросы, не стесняйтесь задавать их! Я сделаю все возможное, чтобы помочь вам.</p>
+                </div>
             </div>
         </div>
         {% for message in chat_history %}
@@ -49,7 +57,7 @@
         <!-- строка для вопросов -->
         <form action="/api" method="post" autocomplete="off" onsubmit="return validateForm()">
             <div class="chat-input">
-                <input name="question" id="question-input" type="text" placeholder="Сообщение боту…" style="overflow-y: hidden;">
+                <input name="question" id="question-input" type="text" placeholder="Сообщение…" style="overflow-y: hidden;" autofocus>
                 <input type="hidden" name="dummy" value="placeholder">
                 <button name="button" class="send-button">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="#232323">
@@ -121,7 +129,7 @@
             padding: 5px;
             position: fixed;
             bottom: 20px;
-            max-width: 720px;
+            max-width: 600px;
             width: 100%;
             background-color: #232323;
         }
@@ -209,6 +217,11 @@
         });
     </script> -->
     <script>
+        // Функция, которая фокусирует на поле ввода после загрузки страницы
+        window.onload = function() {
+            document.getElementById("question-input").focus();
+        };
+
         window.onload = function() {
             window.scrollTo(0, document.body.scrollHeight);
         };
@@ -250,7 +263,7 @@
         if (lastMessageElement) {
             typeMessage(lastMessageElement);
         }
-    </script>
+        </script>
     
 </body>
 </html>

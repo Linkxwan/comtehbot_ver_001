@@ -14,8 +14,8 @@ from fastapi.responses import FileResponse
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import time
-from data_ml import data_set
-from data_gpt import texts
+from data.data_ml import data_set
+from data.data_gpt import texts
 import g4f
 
 import requests
@@ -88,8 +88,8 @@ def read_json(file_path):
         return None
 
 # Считываем базу данных
-data_ml = read_json("data_ml.json")
-data_gpt = read_json("data_gpt.json")
+data_ml = read_json("data/data_ml.json")
+data_gpt = read_json("data/data_gpt.json")
 
 
 async def process_chunk(voice, text_chunk, output_file):
