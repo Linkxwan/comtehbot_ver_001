@@ -331,9 +331,11 @@ async def get_answer(request: Request, question: str = Form(...)):
         if response.status_code == 200:
             # Получаем данные из ответа
             response_data = response.json()
-            chat_history.append({"user": "you", "message": question})
-            chat_history.append({"user": "bot", "message": response_data["response"]})
-            chat_history_by_user[user_id] = chat_history
+            if "response" in response_data:
+                print(response_data)
+                chat_history.append({"user": "you", "message": question})
+                chat_history.append({"user": "bot", "message": response_data["response"]})
+                chat_history_by_user[user_id] = chat_history
         else:
             # Если запрос неуспешен, обрабатываем ошибку
             print(f"Ошибка: {response.status_code}")
