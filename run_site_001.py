@@ -267,7 +267,6 @@ async def get_response(question: str):
             # Если порог сходства превышен, получаем ответ из базы данных
             most_similar_key = list(data_set.keys())[most_similar_index]
             response = data_set[most_similar_key]
-            print(response)
             # Проверяем, существует ли файл для этого ответа в папке voice_data
             json_item = data_ml[most_similar_key]
             logging.info(f"Успешно получен ответ для вопроса: {question}")
@@ -283,7 +282,6 @@ async def get_response(question: str):
         
         else:
             logging.info(f"Не получено ответа для вопроса: {question}")
-            print(data_gpt["text"])
             # Возвращаем ответ с данными и метаданными
             return {
                 "question": question,
@@ -331,11 +329,10 @@ async def get_answer(request: Request, question: str = Form(...)):
         if response.status_code == 200:
             # Получаем данные из ответа
             response_data = response.json()
-            if "response" in response_data:
-                print(response_data)
-                chat_history.append({"user": "you", "message": question})
-                chat_history.append({"user": "bot", "message": response_data["response"]})
-                chat_history_by_user[user_id] = chat_history
+            print(response_data)
+            chat_history.append({"user": "you", "message": question})
+            chat_history.append({"user": "bot", "message": response_data["response"]})
+            chat_history_by_user[user_id] = chat_history
         else:
             # Если запрос неуспешен, обрабатываем ошибку
             print(f"Ошибка: {response.status_code}")
