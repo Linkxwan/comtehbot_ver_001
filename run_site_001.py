@@ -323,7 +323,7 @@ async def get_answer(request: Request, question: str = Form(...)):
     chat_history = chat_history_by_user.get(user_id, [])
     
     async with httpx.AsyncClient() as client:
-        response = await client.get("http://127.0.0.1:8000/get_response", params={"question": question}, timeout=20)
+        response = await client.get("http://0.0.0.0:8000/get_response", params={"question": question}, timeout=20)
 
         # Проверяем успешность запроса
         if response.status_code == 200:
