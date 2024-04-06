@@ -267,7 +267,7 @@ async def get_response(question: str):
             # Если порог сходства превышен, получаем ответ из базы данных
             most_similar_key = list(data_set.keys())[most_similar_index]
             response = data_set[most_similar_key]
-
+            print(response)
             # Проверяем, существует ли файл для этого ответа в папке voice_data
             json_item = data_ml[most_similar_key]
             logging.info(f"Успешно получен ответ для вопроса: {question}")
@@ -283,7 +283,7 @@ async def get_response(question: str):
         
         else:
             logging.info(f"Не получено ответа для вопроса: {question}")
-
+            print(data_gpt["text"])
             # Возвращаем ответ с данными и метаданными
             return {
                 "question": question,
